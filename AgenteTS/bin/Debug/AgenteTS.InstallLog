@@ -400,3 +400,38 @@ Parâmetros afetados são:
    logtoconsole = 
    assemblypath = C:\Users\rcxit\Desktop\agenteTS\AgenteTS\AgenteTS\bin\Debug\AgenteTS.exe
    logfile = C:\Users\rcxit\Desktop\agenteTS\AgenteTS\AgenteTS\bin\Debug\AgenteTS.InstallLog
+Instalando o assembly 'C:\Users\rcxit\Desktop\agenteTS\AgenteTS\AgenteTS\bin\Debug\AgenteTS.exe'.
+Parâmetros afetados são:
+   logtoconsole = 
+   assemblypath = C:\Users\rcxit\Desktop\agenteTS\AgenteTS\AgenteTS\bin\Debug\AgenteTS.exe
+   logfile = C:\Users\rcxit\Desktop\agenteTS\AgenteTS\AgenteTS\bin\Debug\AgenteTS.InstallLog
+Instalando o serviço Servico Agent TS...
+Criando a origem de EventLog Servico Agent TS no log Application...
+Revertendo o assembly 'C:\Users\rcxit\Desktop\agenteTS\AgenteTS\AgenteTS\bin\Debug\AgenteTS.exe'.
+Parâmetros afetados são:
+   logtoconsole = 
+   assemblypath = C:\Users\rcxit\Desktop\agenteTS\AgenteTS\AgenteTS\bin\Debug\AgenteTS.exe
+   logfile = C:\Users\rcxit\Desktop\agenteTS\AgenteTS\AgenteTS\bin\Debug\AgenteTS.InstallLog
+Restaurando o log de eventos para o estado anterior da origem Servico Agent TS.
+Desinstalando o assembly 'C:\Users\rcxit\Desktop\agenteTS\AgenteTS\AgenteTS\bin\Debug\AgenteTS.exe'.
+Parâmetros afetados são:
+   logtoconsole = 
+   assemblypath = C:\Users\rcxit\Desktop\agenteTS\AgenteTS\AgenteTS\bin\Debug\AgenteTS.exe
+   logfile = C:\Users\rcxit\Desktop\agenteTS\AgenteTS\AgenteTS\bin\Debug\AgenteTS.InstallLog
+Removendo a origem do EventLog Servico Agent TS.
+Serviço Servico Agent TS está sendo removido do sistema...
+Serviço Servico Agent TS foi removido com êxito do sistema.
+Tentativa de parar o serviço Servico Agent TS.
+Instalando o assembly 'C:\Users\rcxit\Desktop\agenteTS\AgenteTS\AgenteTS\bin\Debug\AgenteTS.exe'.
+Parâmetros afetados são:
+   logtoconsole = 
+   assemblypath = C:\Users\rcxit\Desktop\agenteTS\AgenteTS\AgenteTS\bin\Debug\AgenteTS.exe
+   logfile = C:\Users\rcxit\Desktop\agenteTS\AgenteTS\AgenteTS\bin\Debug\AgenteTS.InstallLog
+Instalando o serviço Servico Agent TS...
+Serviço Servico Agent TS foi instalado com êxito.
+Criando a origem de EventLog Servico Agent TS no log Application...
+Confirmando o assembly 'C:\Users\rcxit\Desktop\agenteTS\AgenteTS\AgenteTS\bin\Debug\AgenteTS.exe'.
+Parâmetros afetados são:
+   logtoconsole = 
+   assemblypath = C:\Users\rcxit\Desktop\agenteTS\AgenteTS\AgenteTS\bin\Debug\AgenteTS.exe
+   logfile = C:\Users\rcxit\Desktop\agenteTS\AgenteTS\AgenteTS\bin\Debug\AgenteTS.InstallLog

@@ -1,4 +1,6 @@
-﻿namespace AgenteTS
+﻿using System.ComponentModel;
+
+namespace AgenteTS
 {
     partial class Service1
     {
@@ -26,12 +28,17 @@
         /// Método necessário para suporte ao Designer - não modifique 
         /// o conteúdo deste método com o editor de código.
         /// </summary>
+        public System.Diagnostics.EventLog eventLog2 = new System.Diagnostics.EventLog();
+
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            this.ServiceName = "Service1";
+            this.ServiceName = "Agente TS";
+            
         }
 
-        #endregion
     }
+
+    #endregion
+    
 }
