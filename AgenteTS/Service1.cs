@@ -67,7 +67,7 @@ namespace AgenteTS
                     if (str.Equals("get-services"))
                     {
 
-                        using (PowerShell.RunPowerShell PowerShellInstance = PowerShell.Create())
+                        using (PowerShell PowerShellInstance = PowerShell.Create())
                         {
                             // use "AddScript" to add the contents of a script file to the end of the execution pipeline.
                             // use "AddCommand" to add individual commands/cmdlets to the end of the execution pipeline.
