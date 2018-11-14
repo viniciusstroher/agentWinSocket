@@ -98,12 +98,12 @@ namespace AgenteTS
                 ASCIIEncoding asen = new ASCIIEncoding();
 
                 string str = asen.GetString(bytes);
-                Console.WriteLine(str);
                 eventLog1.WriteEntry("str: "+ str);
                 try
                 {
                     string msg           = "ERROR";
                     var parametros       = str.Split('|');
+                    eventLog1.WriteEntry(parametros[1].ToString());
                     /*
                     eventLog1.WriteEntry("compare password: " + Service1.objectPassword["password"] + "<-->" + Encryptor.MD5Hash(params1[0]));
                     eventLog1.WriteEntry("compare password bool: " + Service1.objectPassword["password"].ToString().Equals(Encryptor.MD5Hash(params1[0])));
@@ -112,7 +112,7 @@ namespace AgenteTS
                         
                     Array.ForEach(params1, eventLog1.WriteEntry);
                     */
-                   
+
                     if (parametros.Length == 0)
                     {
                         msg = "Use | para passar a string de parametros";
