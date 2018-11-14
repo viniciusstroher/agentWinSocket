@@ -90,79 +90,74 @@ namespace AgenteTS
             tcpListener.Start();
             Byte[] bytes = new Byte[256];
 
-            try { 
-                while (true)
+            while (true)
+            {
+                Socket socket = tcpListener.AcceptSocket();
+                int result    = socket.Receive(bytes);
+
+                ASCIIEncoding asen = new ASCIIEncoding();
+
+                string str = asen.GetString(bytes);
+                Console.WriteLine(str);
+                eventLog1.WriteEntry("str: "+ str);
+                try
                 {
-                    Socket socket = tcpListener.AcceptSocket();
-                    int result    = socket.Receive(bytes);
-
-                    ASCIIEncoding asen = new ASCIIEncoding();
-
-                    string str = asen.GetString(bytes);
-                    Console.WriteLine(str);
-                    eventLog1.WriteEntry("str: "+ str);
-                    try
-                    {
-                        string msg       = "ERROR";
-                        string[] params1 = str.Split('|');
-                        /*
-                        eventLog1.WriteEntry("compare password: " + Service1.objectPassword["password"] + "<-->" + Encryptor.MD5Hash(params1[0]));
-                        eventLog1.WriteEntry("compare password bool: " + Service1.objectPassword["password"].ToString().Equals(Encryptor.MD5Hash(params1[0])));
-                        eventLog1.WriteEntry("compare service: " + params1[1] + "<--->"+params1[1]);
-                        eventLog1.WriteEntry("compare service bool: " + params1[1].Equals("get-services"));
+                    string msg           = "ERROR";
+                    var parametros       = str.Split('|');
+                    /*
+                    eventLog1.WriteEntry("compare password: " + Service1.objectPassword["password"] + "<-->" + Encryptor.MD5Hash(params1[0]));
+                    eventLog1.WriteEntry("compare password bool: " + Service1.objectPassword["password"].ToString().Equals(Encryptor.MD5Hash(params1[0])));
+                    eventLog1.WriteEntry("compare service: " + params1[1] + "<--->"+params1[1]);
+                    eventLog1.WriteEntry("compare service bool: " + params1[1].Equals("get-services"));
                         
-                        Array.ForEach(params1, eventLog1.WriteEntry);
-                        */
-                        if (params1.Length == 0)
-                        {
-                            msg = "Use | para passar a string de parametros";
-                        }
+                    Array.ForEach(params1, eventLog1.WriteEntry);
+                    */
+                   
+                    if (parametros.Length == 0)
+                    {
+                        msg = "Use | para passar a string de parametros";
+                    }
 
-                        if (!Service1.objectPassword["password"].ToString().Equals(Encryptor.MD5Hash(params1[0])))
-                        {
-                            msg = "Adicione o password na msg";
-                        }
+                    if (!Service1.objectPassword["password"].ToString().Equals(Encryptor.MD5Hash(parametros[0])))
+                    {
+                        msg = "Adicione o password na msg";
+                    }
 
-                        if (string.Equals(params1[1], "get-services"))
+                    if (parametros[1].Equals("get-services"))
+                    {
+                        msg = "fetch";
+                        eventLog1.WriteEntry("FETCH GET-SERVICES!");
+                        /*using (PowerShell PowerShellInstance = PowerShell.Create())
                         {
-                            eventLog1.WriteEntry("FETCH GET-SERVICES!");
-                            using (PowerShell PowerShellInstance = PowerShell.Create())
-                            {
                                 
-                                PowerShellInstance.AddScript("get-service;");
-                                Collection<PSObject> results = PowerShellInstance.Invoke();
+                            PowerShellInstance.AddScript("get-service;");
+                            Collection<PSObject> results = PowerShellInstance.Invoke();
 
-                                foreach (PSObject obj in results)
-                                {
-                                    eventLog1.WriteEntry(obj.ToString());
-                                }
-
-                                msg = "GET_SERVICE!!";
-                                // use "AddParameter" to add a single parameter to the last command/script on the pipeline.
-                                //PowerShellInstance.AddParameter("param1", "parameter 1 value!");
+                            foreach (PSObject obj in results)
+                            {
+                                eventLog1.WriteEntry(obj.ToString());
                             }
 
-                        }
-                        
-                        socket.Send(Encoding.ASCII.GetBytes(msg));
-                    }
-                    catch(Exception e)
-                    {
-                        eventLog1.WriteEntry(e.Message);
-                    }
-                    finally
-                    {
-                        socket.Close();
-                    }
+                            msg = "GET_SERVICE!!";
+                            // use "AddParameter" to add a single parameter to the last command/script on the pipeline.
+                            //PowerShellInstance.AddParameter("param1", "parameter 1 value!");
+                        }*/
 
-                    
-                    
+                    }
+                        
+                    socket.Send(Encoding.ASCII.GetBytes(msg));
                 }
-            }catch (Exception e)
-            {
-                eventLog1.WriteEntry(e.Message);
-               
+                catch(Exception e)
+                {
+                    eventLog1.WriteEntry(e.Message);
+                }
+                finally
+                {
+                    socket.Close();
+                }
+                    
             }
+            
         }
 
 
