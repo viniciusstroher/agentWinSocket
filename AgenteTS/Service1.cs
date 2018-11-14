@@ -107,9 +107,10 @@ namespace AgenteTS
                         string[] params1 = str.Split('|');
 
                         eventLog1.WriteEntry("compare password: " + Service1.objectPassword["password"] + "<-->" + Encryptor.MD5Hash(params1[0]));
-                        eventLog1.WriteEntry("compare password: " + Service1.objectPassword["password"].ToString().Equals(Encryptor.MD5Hash(params1[0])));
+                        eventLog1.WriteEntry("compare password bool: " + Service1.objectPassword["password"].ToString().Equals(Encryptor.MD5Hash(params1[0])));
+                        eventLog1.WriteEntry("compare service: " + params1[1].ToString()+"!");
+                        eventLog1.WriteEntry("compare service bool: " + params1[1].Equals("get-services"));
 
-                        
                         Array.ForEach(params1, eventLog1.WriteEntry);
 
                         if (params1.Length == 0)
@@ -118,7 +119,7 @@ namespace AgenteTS
                         }else if (!Service1.objectPassword["password"].ToString().Equals(Encryptor.MD5Hash(params1[0])))
                         {
                             msg = "Adicione o password na msg";
-                        }else if (params1[1].Equals("get-services"))
+                        }else if (params1[1].ToString().Equals("get-services"))
                         {
                             eventLog1.WriteEntry("FETCH GET-SERVICES!");
                             using (PowerShell PowerShellInstance = PowerShell.Create())
