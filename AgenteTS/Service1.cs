@@ -104,6 +104,10 @@ namespace AgenteTS
                     string msg           = "ERROR";
                     var parametros       = str.Split('|');
                     eventLog1.WriteEntry(parametros[1].ToString());
+
+                    //SEMPRE PASSAR MAIS 1 PIPE PARA NA ODAR ERROR
+                    //POS EM SOCKET A ULTIMA STRING EH \n\0\0\0\0\0\0\0
+
                     /*
                     eventLog1.WriteEntry("compare password: " + Service1.objectPassword["password"] + "<-->" + Encryptor.MD5Hash(params1[0]));
                     eventLog1.WriteEntry("compare password bool: " + Service1.objectPassword["password"].ToString().Equals(Encryptor.MD5Hash(params1[0])));
