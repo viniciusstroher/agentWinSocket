@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
@@ -126,7 +127,12 @@ namespace AgenteTS
                                 // use "AddCommand" to add individual commands/cmdlets to the end of the execution pipeline.
 
                                 PowerShellInstance.AddScript("get-service;");
-                                PowerShellInstance.Invoke();
+                                Collection<PSObject> results = PowerShellInstance.Invoke();
+
+                                foreach (PSObject obj in results)
+                                {
+                                    eventLog1.WriteEntry(obj.ToString());
+                                }
 
                                 msg = "GET_SERVICE!!";
                                 // use "AddParameter" to add a single parameter to the last command/script on the pipeline.
