@@ -103,38 +103,50 @@ namespace AgenteTS
 
                     try
                     {
+                        string msg = "ERROR";
                         if (!Service1.objectPassword["password"].Equals(str))
                         {
-                            string msg = "I receive your message on: " + DateTime.Now;
+                            msg = "Adicione o password na msg" + DateTime.Now;
                             socket.Send(Encoding.ASCII.GetBytes(msg));
                         }
+
+
+                        if (str.Equals("get-services"))
+                        {
+
+                            using (PowerShell PowerShellInstance = PowerShell.Create())
+                            {
+                                // use "AddScript" to add the contents of a script file to the end of the execution pipeline.
+                                // use "AddCommand" to add individual commands/cmdlets to the end of the execution pipeline.
+
+                                PowerShellInstance.AddScript("get-service;");
+                                PowerShellInstance.Invoke();
+
+                                msg = "GET_SERVICE!!";
+                                // use "AddParameter" to add a single parameter to the last command/script on the pipeline.
+                                //PowerShellInstance.AddParameter("param1", "parameter 1 value!");
+                            }
+
+                        }
+
+
+                        socket.Send(Encoding.ASCII.GetBytes(msg));
                     }
                     catch(Exception e)
                     {
-
+                        eventLog1.WriteEntry(e.Message);
                     }
-
-                    if (str.Equals("get-services"))
+                    finally
                     {
-
-                        using (PowerShell PowerShellInstance = PowerShell.Create())
-                        {
-                            // use "AddScript" to add the contents of a script file to the end of the execution pipeline.
-                            // use "AddCommand" to add individual commands/cmdlets to the end of the execution pipeline.
-
-                            PowerShellInstance.AddScript("get-service;");
-                            PowerShellInstance.Invoke();
-                            // use "AddParameter" to add a single parameter to the last command/script on the pipeline.
-                            //PowerShellInstance.AddParameter("param1", "parameter 1 value!");
-                        }
-
+                        socket.Close();
                     }
-                    socket.Close();
+
+                    
+                    
                 }
             }catch (Exception e)
             {
                 eventLog1.WriteEntry("In OnStart.");
-                Console.WriteLine(e.Message);
                
             }
         }
