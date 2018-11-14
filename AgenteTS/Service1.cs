@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Management.Automation;
+using System.Management.Automation.Runspaces;
 using System.Net;
 using System.Net.Sockets;
 using System.ServiceProcess;
@@ -131,14 +132,24 @@ namespace AgenteTS
                     {
                         msg = "fetch";
                         eventLog1.WriteEntry("FETCH GET-SERVICES!");
+                        Runspace runspace = RunspaceFactory.CreateRunspace();
+                        runspace.Open();
+
                         using (PowerShell PowerShellInstance = PowerShell.Create())
                         {
-                                
+
+
+                            PowerShellInstance.Runspace = runspace;
+
                             PowerShellInstance.AddScript("get-service;");
                             Collection<PSObject> results = PowerShellInstance.Invoke();
 
+                            runspace.Close();
+                            StringBuilder stringBuilder = new StringBuilder();
+
                             foreach (PSObject obj in results)
                             {
+                                stringBuilder.Append(obj.ToString()+",");
                                 eventLog1.WriteEntry(obj.ToString());
                             }
 
