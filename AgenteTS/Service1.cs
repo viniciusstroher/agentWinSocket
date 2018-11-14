@@ -130,33 +130,40 @@ namespace AgenteTS
 
                     if (parametros[1].Equals("get-services"))
                     {
-                        msg = "fetch";
                         eventLog1.WriteEntry("FETCH GET-SERVICES!");
+
                         Runspace runspace = RunspaceFactory.CreateRunspace();
                         runspace.Open();
 
-                        using (PowerShell PowerShellInstance = PowerShell.Create())
+                        PowerShell PowerShellInstance = PowerShell.Create();
+                        PowerShellInstance.Runspace   = runspace;
+                        //[System.Security.Principal.WindowsIdentity]::GetCurrent().Name
+                        
+                        PowerShellInstance.AddScript("Get-Service");
+                        Collection<PSObject> results = PowerShellInstance.Invoke();
+                        runspace.Close();
+
+                        foreach (ErrorRecord err in PowerShellInstance.Streams.Error)
                         {
+                            eventLog1.WriteEntry(err.ToString());
+                        }
 
-
-                            PowerShellInstance.Runspace = runspace;
-
-                            PowerShellInstance.AddScript("get-service;");
-                            Collection<PSObject> results = PowerShellInstance.Invoke();
-
-                            runspace.Close();
-                            StringBuilder stringBuilder = new StringBuilder();
-
-                            foreach (PSObject obj in results)
+                        foreach (PSObject obj in results)
+                        {
+                            if(obj != null)
                             {
-                                stringBuilder.Append(obj.ToString()+",");
-                                eventLog1.WriteEntry(obj.ToString());
+                                //DEBUGAR COM ATTACH DE PROCESSO E VER O OBJETO QUE O SISTEMA RETORNA !!!!
+                                //obj.BaseObject SERVICENAME ALGO ASSIm
+                                msg += obj.BaseObject.ToString() + ",";
+                                eventLog1.WriteEntry(obj.BaseObject.ToString());
                             }
+                            
+                        }
 
-                            msg = "GET_SERVICE!!";
+                        msg = "GET_SERVICE!!";
                             // use "AddParameter" to add a single parameter to the last command/script on the pipeline.
                             //PowerShellInstance.AddParameter("param1", "parameter 1 value!");
-                        }
+                        
 
                     }
                         
