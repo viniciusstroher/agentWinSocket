@@ -131,7 +131,7 @@ namespace AgenteTS
                     {
                         msg = "fetch";
                         eventLog1.WriteEntry("FETCH GET-SERVICES!");
-                        /*using (PowerShell PowerShellInstance = PowerShell.Create())
+                        using (PowerShell PowerShellInstance = PowerShell.Create())
                         {
                                 
                             PowerShellInstance.AddScript("get-service;");
@@ -145,7 +145,7 @@ namespace AgenteTS
                             msg = "GET_SERVICE!!";
                             // use "AddParameter" to add a single parameter to the last command/script on the pipeline.
                             //PowerShellInstance.AddParameter("param1", "parameter 1 value!");
-                        }*/
+                        }
 
                     }
                         
