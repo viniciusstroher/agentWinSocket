@@ -100,18 +100,23 @@ namespace AgenteTS
                     string str = asen.GetString(bytes);
                     Console.WriteLine(str);
                     eventLog1.WriteEntry("str: "+ str);
-
                     try
                     {
-                        string msg = "ERROR";
-                        if (!Service1.objectPassword["password"].Equals(str))
+                        string msg       = "ERROR";
+                        string[] params1 = str.Split('|');
+
+                        eventLog1.WriteEntry("compare password: " + Service1.objectPassword["password"] + "<-->" + Encryptor.MD5Hash(params1[0]));
+
+
+                        Array.ForEach(params1, eventLog1.WriteEntry);
+
+                        if (params1.Length == 0)
                         {
-                            msg = "Adicione o password na msg" + DateTime.Now;
-                            socket.Send(Encoding.ASCII.GetBytes(msg));
-                        }
-
-
-                        if (str.Equals("get-services"))
+                            msg = "Use | para passar a string de parametros";
+                        }else if (!Service1.objectPassword["password"].Equals(Encryptor.MD5Hash(params1[0])))
+                        {
+                            msg = "Adicione o password na msg";
+                        }else if (params1[1].Equals("get-services"))
                         {
 
                             using (PowerShell PowerShellInstance = PowerShell.Create())
@@ -128,8 +133,7 @@ namespace AgenteTS
                             }
 
                         }
-
-
+                        
                         socket.Send(Encoding.ASCII.GetBytes(msg));
                     }
                     catch(Exception e)
