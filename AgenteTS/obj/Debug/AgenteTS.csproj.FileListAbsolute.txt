@@ -8,3 +8,13 @@ C:\Users\rcxit\Desktop\agenteTS\AgenteTS\AgenteTS\obj\Debug\AgenteTS.exe
 C:\Users\rcxit\Desktop\agenteTS\AgenteTS\AgenteTS\obj\Debug\AgenteTS.pdb
 C:\Users\veni\Desktop\agentWinSocket\AgenteTS\bin\Debug\AgenteTS.exe
 C:\Users\veni\Desktop\agentWinSocket\AgenteTS\bin\Debug\Newtonsoft.Json.dll
+C:\Users\veni\Desktop\agentWinSocket\AgenteTS\bin\Debug\AgenteTS.exe.config
+C:\Users\veni\Desktop\agentWinSocket\AgenteTS\bin\Debug\AgenteTS.pdb
+C:\Users\veni\Desktop\agentWinSocket\AgenteTS\bin\Debug\System.Management.Automation.dll
+C:\Users\veni\Desktop\agentWinSocket\AgenteTS\bin\Debug\Newtonsoft.Json.xml
+C:\Users\veni\Desktop\agentWinSocket\AgenteTS\obj\Debug\AgenteTS.ProjectInstaller.resources
+C:\Users\veni\Desktop\agentWinSocket\AgenteTS\obj\Debug\AgenteTS.csproj.GenerateResource.cache
+C:\Users\veni\Desktop\agentWinSocket\AgenteTS\obj\Debug\AgenteTS.csproj.CoreCompileInputs.cache
+C:\Users\veni\Desktop\agentWinSocket\AgenteTS\obj\Debug\AgenteTS.csproj.CopyComplete
+C:\Users\veni\Desktop\agentWinSocket\AgenteTS\obj\Debug\AgenteTS.exe
+C:\Users\veni\Desktop\agentWinSocket\AgenteTS\obj\Debug\AgenteTS.pdb

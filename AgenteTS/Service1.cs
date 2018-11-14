@@ -105,28 +105,30 @@ namespace AgenteTS
                     {
                         string msg       = "ERROR";
                         string[] params1 = str.Split('|');
-
+                        /*
                         eventLog1.WriteEntry("compare password: " + Service1.objectPassword["password"] + "<-->" + Encryptor.MD5Hash(params1[0]));
                         eventLog1.WriteEntry("compare password bool: " + Service1.objectPassword["password"].ToString().Equals(Encryptor.MD5Hash(params1[0])));
-                        eventLog1.WriteEntry("compare service: " + params1[1].ToString()+"!");
+                        eventLog1.WriteEntry("compare service: " + params1[1] + "<--->"+params1[1]);
                         eventLog1.WriteEntry("compare service bool: " + params1[1].Equals("get-services"));
-
+                        
                         Array.ForEach(params1, eventLog1.WriteEntry);
-
+                        */
                         if (params1.Length == 0)
                         {
                             msg = "Use | para passar a string de parametros";
-                        }else if (!Service1.objectPassword["password"].ToString().Equals(Encryptor.MD5Hash(params1[0])))
+                        }
+
+                        if (!Service1.objectPassword["password"].ToString().Equals(Encryptor.MD5Hash(params1[0])))
                         {
                             msg = "Adicione o password na msg";
-                        }else if (params1[1].ToString().Equals("get-services"))
+                        }
+
+                        if (string.Equals(params1[1], "get-services"))
                         {
                             eventLog1.WriteEntry("FETCH GET-SERVICES!");
                             using (PowerShell PowerShellInstance = PowerShell.Create())
                             {
-                                // use "AddScript" to add the contents of a script file to the end of the execution pipeline.
-                                // use "AddCommand" to add individual commands/cmdlets to the end of the execution pipeline.
-
+                                
                                 PowerShellInstance.AddScript("get-service;");
                                 Collection<PSObject> results = PowerShellInstance.Invoke();
 
@@ -158,7 +160,7 @@ namespace AgenteTS
                 }
             }catch (Exception e)
             {
-                eventLog1.WriteEntry("In OnStart.");
+                eventLog1.WriteEntry(e.Message);
                
             }
         }
