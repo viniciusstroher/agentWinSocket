@@ -132,33 +132,9 @@ namespace AgenteTS
                     {
                         eventLog1.WriteEntry("FETCH GET-SERVICES!");
 
-                        Runspace runspace = RunspaceFactory.CreateRunspace();
-                        runspace.Open();
+                        string aaaaa = runCmd("qwinsta");
 
-                        PowerShell PowerShellInstance = PowerShell.Create();
-                        PowerShellInstance.Runspace   = runspace;
-                        //[System.Security.Principal.WindowsIdentity]::GetCurrent().Name
-                        
-                        PowerShellInstance.AddScript("Get-Service");
-                        Collection<PSObject> results = PowerShellInstance.Invoke();
-                        runspace.Close();
 
-                        foreach (ErrorRecord err in PowerShellInstance.Streams.Error)
-                        {
-                            eventLog1.WriteEntry(err.ToString());
-                        }
-
-                        foreach (PSObject obj in results)
-                        {
-                            if(obj != null)
-                            {
-                                //DEBUGAR COM ATTACH DE PROCESSO E VER O OBJETO QUE O SISTEMA RETORNA !!!!
-                                //obj.BaseObject SERVICENAME ALGO ASSIm
-                                msg += obj.BaseObject.ToString() + ",";
-                                eventLog1.WriteEntry(obj.BaseObject.ToString());
-                            }
-                            
-                        }
 
                         msg = "GET_SERVICE!!";
                             // use "AddParameter" to add a single parameter to the last command/script on the pipeline.
@@ -183,5 +159,30 @@ namespace AgenteTS
         }
 
 
+        public static string runCmd(string command)
+        {
+
+            using (Process p = new Process())
+            {
+                System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo(@"C:\Windows\System32\cmd.exe");
+                psi.Arguments = "/c qwinsta";
+                psi.RedirectStandardOutput = true;
+                psi.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                psi.UseShellExecute = false;
+                System.Diagnostics.Process proc = System.Diagnostics.Process.Start(psi); ;
+                System.IO.StreamReader myOutput = proc.StandardOutput;
+                proc.WaitForExit(2000);
+                if (proc.HasExited)
+                {
+                    string output = myOutput.ReadToEnd();
+                    return output;
+                }
+
+                return "";
+            }
+        }
     }
+
+
 }
+
