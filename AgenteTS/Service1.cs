@@ -109,16 +109,7 @@ namespace AgenteTS
 
                     //SEMPRE PASSAR MAIS 1 PIPE PARA NA ODAR ERROR
                     //POS EM SOCKET A ULTIMA STRING EH \n\0\0\0\0\0\0\0
-
-                    /*
-                    eventLog1.WriteEntry("compare password: " + Service1.objectPassword["password"] + "<-->" + Encryptor.MD5Hash(params1[0]));
-                    eventLog1.WriteEntry("compare password bool: " + Service1.objectPassword["password"].ToString().Equals(Encryptor.MD5Hash(params1[0])));
-                    eventLog1.WriteEntry("compare service: " + params1[1] + "<--->"+params1[1]);
-                    eventLog1.WriteEntry("compare service bool: " + params1[1].Equals("get-services"));
-                        
-                    Array.ForEach(params1, eventLog1.WriteEntry);
-                    */
-
+                    
                     if (parametros.Length == 0)
                     {
                         msg = "Use | para passar a string de parametros";
@@ -129,21 +120,22 @@ namespace AgenteTS
                         msg = "Adicione o password na msg";
                     }
 
-                    if (parametros[1].Equals("get-services"))
+                    if (parametros[1].Equals("get-session"))
                     {
-                        eventLog1.WriteEntry("FETCH GET-SERVICES!");
+                        eventLog1.WriteEntry("get-session!");
 
-                        string output = runCmd("qwinsta");
-
-
-
-                        msg = output;
-                            // use "AddParameter" to add a single parameter to the last command/script on the pipeline.
-                            //PowerShellInstance.AddParameter("param1", "parameter 1 value!");
-                        
-
+                        string output = runCmd("qwinsta",null);
+                        msg           = output;
                     }
-                        
+
+                    if (parametros[1].Equals("kill-session"))
+                    {
+                        eventLog1.WriteEntry("kill-session!");
+
+                        string output = runCmd("rwinsta", parametros[2]);
+                        msg           = output;
+                    }
+
                     socket.Send(Encoding.ASCII.GetBytes(msg));
                 }
                 catch(Exception e)
@@ -160,61 +152,19 @@ namespace AgenteTS
         }
 
 
-        public static string runCmd(string command)
-        {/*
-            string output = "";
-            string outputerr = "";
-            // ProcessStartInfo start_info = new ProcessStartInfo(@"C:\Windows\System32\qwinsta.exe");
-
-            var secure = new SecureString();
-            var pass = "995865";
-            foreach (char c in pass)
-            {
-                secure.AppendChar(c);
-            }
-            ProcessStartInfo start_info = new ProcessStartInfo
-            {
-               
-                CreateNoWindow = true,
-                FileName = "qwinsta",
-                Arguments = null,
-                UserName = "Administrador",
-                Domain = "",
-
-                Password = secure,
-                UseShellExecute =false,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true
-            };
-
-            using (Process proc = new Process())
-            {
-                proc.StartInfo = start_info;
-                proc.Start();
-
-                // Attach to stdout and stderr.
-                using (StreamReader std_out = proc.StandardOutput)
-                {
-                    using (StreamReader std_err = proc.StandardError)
-                    {
-                        // Display the results.
-                        output += std_out.ReadToEnd();
-                        outputerr += std_err.ReadToEnd();
-
-                        // Clean up.
-                        std_err.Close();
-                        std_out.Close();
-                        proc.Close();
-                    }
-                }
-                eventLog1.WriteEntry(outputerr);
-                return output;
-            }*/
+        public static string runCmd(string command, string params1)
+        {
             string filePath = Path.Combine(Environment.SystemDirectory, "qwinsta.exe");
 
             Process compiler = new Process();
-            compiler.StartInfo.FileName = @"C:\Windows\SysNative\qwinsta.exe";
+            compiler.StartInfo.FileName = @"C:\Windows\SysNative\"+ command + ".exe";
             compiler.StartInfo.Arguments = null;
+            if(params1 != null)
+            {
+                compiler.StartInfo.Arguments = params1;
+            }
+
+
             compiler.StartInfo.UseShellExecute = false;
             compiler.StartInfo.RedirectStandardOutput = true;
             compiler.StartInfo.Verb = "runas";

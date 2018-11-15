@@ -18,3 +18,4 @@ C:\Users\veni\Desktop\agentWinSocket\AgenteTS\obj\Debug\AgenteTS.csproj.CoreComp
 C:\Users\veni\Desktop\agentWinSocket\AgenteTS\obj\Debug\AgenteTS.csproj.CopyComplete
 C:\Users\veni\Desktop\agentWinSocket\AgenteTS\obj\Debug\AgenteTS.exe
 C:\Users\veni\Desktop\agentWinSocket\AgenteTS\obj\Debug\AgenteTS.pdb
+C:\Users\veni\Desktop\agentWinSocket\AgenteTS\obj\Debug\AgenteTS.csprojAssemblyReference.cache
