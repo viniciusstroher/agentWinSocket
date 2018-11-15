@@ -69,7 +69,8 @@ namespace AgenteTS
 
                 File.Create(curFile).Close();
                 
-                JObject jsonObject = new JObject(new JProperty("password", Encryptor.MD5Hash("excelsior")));
+                JObject jsonObject = new JObject(new JProperty("password", Encryptor.MD5Hash("excelsior"));
+                jsonObject.Add(new JProperty("port", 5000));
                 File.WriteAllText(curFile, jsonObject.ToString());
 
                 eventLog1.WriteEntry(curFile+"-->"+jsonObject.ToString());
@@ -88,7 +89,7 @@ namespace AgenteTS
 
         public static void listernet() {
             IPAddress ipAddress     = IPAddress.Parse("0.0.0.0");
-            TcpListener tcpListener = new TcpListener(ipAddress, 5000);
+            TcpListener tcpListener = new TcpListener(ipAddress, (int)Service1.objectPassword["port"]);
             tcpListener.Start();
             Byte[] bytes = new Byte[256];
 
