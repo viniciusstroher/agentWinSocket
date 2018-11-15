@@ -13,6 +13,7 @@ using System.Management.Automation;
 using System.Management.Automation.Runspaces;
 using System.Net;
 using System.Net.Sockets;
+using System.Security;
 using System.ServiceProcess;
 using System.Text;
 using System.Threading;
@@ -161,24 +162,52 @@ namespace AgenteTS
 
         public static string runCmd(string command)
         {
+            string output = "";
+            string outputerr = "";
+            // ProcessStartInfo start_info = new ProcessStartInfo(@"C:\Windows\System32\qwinsta.exe");
 
-            using (Process p = new Process())
+            var secure = new SecureString();
+            var pass = "995865";
+            foreach (char c in pass)
             {
-                System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo(@"C:\Windows\System32\cmd.exe");
-                psi.Arguments = "/c qwinsta";
-                psi.RedirectStandardOutput = true;
-                psi.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                psi.UseShellExecute = false;
-                System.Diagnostics.Process proc = System.Diagnostics.Process.Start(psi); ;
-                System.IO.StreamReader myOutput = proc.StandardOutput;
-                proc.WaitForExit(2000);
-                if (proc.HasExited)
-                {
-                    string output = myOutput.ReadToEnd();
-                    return output;
-                }
+                secure.AppendChar(c);
+            }
+            ProcessStartInfo start_info = new ProcessStartInfo
+            {
+               
+                CreateNoWindow = true,
+                FileName = "qwinsta",
+                Arguments = null,
+                UserName = "Administrador",
+                Domain = "",
+                Password = secure,
+                UseShellExecute =false,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true
+            };
 
-                return "";
+            using (Process proc = new Process())
+            {
+                proc.StartInfo = start_info;
+                proc.Start();
+
+                // Attach to stdout and stderr.
+                using (StreamReader std_out = proc.StandardOutput)
+                {
+                    using (StreamReader std_err = proc.StandardError)
+                    {
+                        // Display the results.
+                        output += std_out.ReadToEnd();
+                        outputerr += std_err.ReadToEnd();
+
+                        // Clean up.
+                        std_err.Close();
+                        std_out.Close();
+                        proc.Close();
+                    }
+                }
+                eventLog1.WriteEntry(outputerr);
+                return output;
             }
         }
     }
