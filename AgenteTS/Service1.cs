@@ -123,16 +123,25 @@ namespace AgenteTS
                     if (parametros[1].Equals("get-session"))
                     {
                         eventLog1.WriteEntry("get-session!");
+                        string param2 = null;
+                        if (!parametros[2].Equals(""))
+                        {
+                            param2 = parametros[2];
+                        }
 
-                        string output = runCmd("qwinsta",null);
+                        string output = runCmd("qwinsta", param2);
                         msg           = output;
                     }
 
                     if (parametros[1].Equals("kill-session"))
                     {
                         eventLog1.WriteEntry("kill-session!");
-
-                        string output = runCmd("rwinsta", parametros[2]);
+                        string param2 = null;
+                        if (!parametros[2].Equals(""))
+                        {
+                            param2 = parametros[2];
+                        }
+                        string output = runCmd("rwinsta", param2);
                         msg           = output;
                     }
 
