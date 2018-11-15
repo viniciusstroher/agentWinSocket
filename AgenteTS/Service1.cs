@@ -109,7 +109,7 @@ namespace AgenteTS
 
                     //SEMPRE PASSAR MAIS 1 PIPE PARA NA ODAR ERROR
                     //POS EM SOCKET A ULTIMA STRING EH \n\0\0\0\0\0\0\0
-                    
+                    // echo "<password>|<get-session kill-session>|param2|" | nc <ip> <port>
                     if (parametros.Length == 0)
                     {
                         msg = "Use | para passar a string de parametros";
