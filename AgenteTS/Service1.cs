@@ -133,11 +133,11 @@ namespace AgenteTS
                     {
                         eventLog1.WriteEntry("FETCH GET-SERVICES!");
 
-                        string aaaaa = runCmd("qwinsta");
+                        string output = runCmd("qwinsta");
 
 
 
-                        msg = "GET_SERVICE!!";
+                        msg = output;
                             // use "AddParameter" to add a single parameter to the last command/script on the pipeline.
                             //PowerShellInstance.AddParameter("param1", "parameter 1 value!");
                         
@@ -220,11 +220,11 @@ namespace AgenteTS
             compiler.StartInfo.Verb = "runas";
             compiler.Start();
 
-           
+            string ouput = compiler.StandardOutput.ReadToEnd();
             eventLog1.WriteEntry(compiler.StandardOutput.ReadToEnd());
 
             compiler.WaitForExit();
-            return "";
+            return ouput;
         }
     }
 
