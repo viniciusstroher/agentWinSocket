@@ -161,7 +161,7 @@ namespace AgenteTS
 
 
         public static string runCmd(string command)
-        {
+        {/*
             string output = "";
             string outputerr = "";
             // ProcessStartInfo start_info = new ProcessStartInfo(@"C:\Windows\System32\qwinsta.exe");
@@ -180,6 +180,7 @@ namespace AgenteTS
                 Arguments = null,
                 UserName = "Administrador",
                 Domain = "",
+
                 Password = secure,
                 UseShellExecute =false,
                 RedirectStandardOutput = true,
@@ -208,7 +209,22 @@ namespace AgenteTS
                 }
                 eventLog1.WriteEntry(outputerr);
                 return output;
-            }
+            }*/
+            string filePath = Path.Combine(Environment.SystemDirectory, "qwinsta.exe");
+
+            Process compiler = new Process();
+            compiler.StartInfo.FileName = @"C:\Windows\SysNative\qwinsta.exe";
+            compiler.StartInfo.Arguments = null;
+            compiler.StartInfo.UseShellExecute = false;
+            compiler.StartInfo.RedirectStandardOutput = true;
+            compiler.StartInfo.Verb = "runas";
+            compiler.Start();
+
+           
+            eventLog1.WriteEntry(compiler.StandardOutput.ReadToEnd());
+
+            compiler.WaitForExit();
+            return "";
         }
     }
 
