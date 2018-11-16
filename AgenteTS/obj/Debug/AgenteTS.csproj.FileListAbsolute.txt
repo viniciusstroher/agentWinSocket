@@ -19,3 +19,16 @@ C:\Users\veni\Desktop\agentWinSocket\AgenteTS\obj\Debug\AgenteTS.csproj.CopyComp
 C:\Users\veni\Desktop\agentWinSocket\AgenteTS\obj\Debug\AgenteTS.exe
 C:\Users\veni\Desktop\agentWinSocket\AgenteTS\obj\Debug\AgenteTS.pdb
 C:\Users\veni\Desktop\agentWinSocket\AgenteTS\obj\Debug\AgenteTS.csprojAssemblyReference.cache
+C:\Users\rcxit\Desktop\agentWinSocket\AgenteTS\obj\Debug\AgenteTS.csprojAssemblyReference.cache
+C:\Users\rcxit\Desktop\agentWinSocket\AgenteTS\obj\Debug\AgenteTS.ProjectInstaller.resources
+C:\Users\rcxit\Desktop\agentWinSocket\AgenteTS\obj\Debug\AgenteTS.csproj.GenerateResource.cache
+C:\Users\rcxit\Desktop\agentWinSocket\AgenteTS\obj\Debug\AgenteTS.csproj.CoreCompileInputs.cache
+C:\Users\rcxit\Desktop\agentWinSocket\AgenteTS\obj\Debug\AgenteTS.exe
+C:\Users\rcxit\Desktop\agentWinSocket\AgenteTS\obj\Debug\AgenteTS.pdb
+C:\Users\rcxit\Desktop\agentWinSocket\AgenteTS\bin\Debug\AgenteTS.exe.config
+C:\Users\rcxit\Desktop\agentWinSocket\AgenteTS\bin\Debug\AgenteTS.exe
+C:\Users\rcxit\Desktop\agentWinSocket\AgenteTS\bin\Debug\AgenteTS.pdb
+C:\Users\rcxit\Desktop\agentWinSocket\AgenteTS\bin\Debug\Newtonsoft.Json.dll
+C:\Users\rcxit\Desktop\agentWinSocket\AgenteTS\bin\Debug\System.Management.Automation.dll
+C:\Users\rcxit\Desktop\agentWinSocket\AgenteTS\bin\Debug\Newtonsoft.Json.xml
+C:\Users\rcxit\Desktop\agentWinSocket\AgenteTS\obj\Debug\AgenteTS.csproj.CopyComplete

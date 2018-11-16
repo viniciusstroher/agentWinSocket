@@ -69,7 +69,7 @@ namespace AgenteTS
 
                 File.Create(curFile).Close();
                 
-                JObject jsonObject = new JObject(new JProperty("password", Encryptor.MD5Hash("excelsior"));
+                JObject jsonObject = new JObject(new JProperty("password", Encryptor.MD5Hash("excelsior")));
                 jsonObject.Add(new JProperty("port", 5000));
                 File.WriteAllText(curFile, jsonObject.ToString());
 
