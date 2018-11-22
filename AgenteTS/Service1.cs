@@ -62,14 +62,15 @@ namespace AgenteTS
 
         public void initService()
         {
-            string curFile = @"c:\agentWin32Service.json";
+            string curFile = AppDomain.CurrentDomain.BaseDirectory + "\\agentWin32Service.json";
+            //string curFile = @"c:\agentWin32Service.json";
 
             if (!File.Exists(curFile))
             {
 
                 File.Create(curFile).Close();
                 
-                JObject jsonObject = new JObject(new JProperty("password", Encryptor.MD5Hash("excelsior"));
+                JObject jsonObject = new JObject(new JProperty("password", Encryptor.MD5Hash("excelsior")));
                 jsonObject.Add(new JProperty("port", 5000));
                 File.WriteAllText(curFile, jsonObject.ToString());
 
